@@ -8,14 +8,14 @@
 
 namespace Cli {
 
-    enum Direction{
+    enum class Direction{
         LEFT,
         RIGHT,
         BOTH,
         DEFAULT,
     };
 
-    enum Position{
+    enum class Position{
         TOP,
         TOPMID,
         TOPLEFT,
