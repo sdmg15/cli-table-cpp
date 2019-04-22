@@ -29,27 +29,100 @@ namespace Cli {
         MID,
         RIGHT,
         RIGHTMID,
+        MIDMID,
         MIDDLE,
     };
 
     struct Options {
 
-        std::map<Cli::Position, char> m_positionChars;
+        std::map<Cli::Position, std::string> m_positionChars;
         std::string m_truncate;
         std::vector<int> m_colWidths;
         std::vector<int> m_colAligns;
 
-        Options(std::map<Cli::Position,char> pos, const std::string& truncate,
+        //Initializing all default values
+        Options() {
+            this->init();
+        }
+
+        Options(std::map<Cli::Position,std::string> pos, const std::string& truncate,
                 std::vector<int> colWidths, 
-                std::vector<int> colAligns );
+                std::vector<int> colAligns ){
+                    
+                    Options();
 
-        Options(std::map<Cli::Position,char> pos);
+                    mergePositionsWithDefaults(pos);
+                    m_truncate = truncate;
+                    m_colAligns = colAligns;
+                    m_colWidths = colWidths;
 
-        Options(std::map<Cli::Position, char> pos, const std::string& truncate);
+                }
 
-        Options(std::map<Cli::Position, char> pos, std::vector<int> colWidths, std::vector<int> colAligns);
+        Options(std::map<Cli::Position,std::string> pos){
+          
+            this->init();
+            mergePositionsWithDefaults(pos);
+        }
+
+        Options(std::map<Cli::Position, std::string> pos, const std::string& truncate){
+
+            this->init();
+            mergePositionsWithDefaults(pos);
+            m_truncate = truncate;
+        }
+
+        Options(std::map<Cli::Position, std::string> pos, std::vector<int> colWidths, std::vector<int> colAligns){
+
+                this->init();
+                mergePositionsWithDefaults(pos);
+                m_colWidths = colWidths;
+                m_colAligns = colAligns;
+        }
 
         ~Options(){}
+
+        private:
+
+            /**
+             * @brief Merge user positions with defaults 
+             * @param [std::map<Cli::Position,char>] positions
+             **/
+
+            void mergePositionsWithDefaults(const std::map<Cli::Position,std::string>& positions){
+                
+                for(const auto& position: positions){
+                    m_positionChars[position.first] = position.second;
+                }
+            }
+
+            /**
+             * Initialize parameters 
+             **/
+            void init(){
+
+                m_positionChars = {
+
+                    { Position::TOP,         "─"},
+                    { Position::TOPMID,      "┬"},
+                    { Position::TOPLEFT,     "┌"},
+                    { Position::TOPRIGHT,    "┐"},
+                    { Position::BOTTOM,      "─"},
+                    { Position::BOTTOMMID,   "┴"},
+                    { Position::BOTTOMLEFT,  "└"},
+                    { Position::BOTTOMRIGHT, "┘"},
+                    { Position::LEFT,       "│"},
+                    { Position::LEFTMID,     "├"},
+                    { Position::MID,         "─"},
+                    { Position::MIDMID,      "┼"},
+                    { Position::RIGHT,      "│"},
+                    { Position::RIGHTMID,    "┤"}
+                };
+                
+                m_truncate = "...";
+                m_colAligns = {};
+                m_colAligns = {};
+            }
+
     };
 
 
