@@ -110,11 +110,11 @@ namespace Cli {
                     { Position::BOTTOMMID,   "┴"},
                     { Position::BOTTOMLEFT,  "└"},
                     { Position::BOTTOMRIGHT, "┘"},
-                    { Position::LEFT,       "│"},
+                    { Position::LEFT,        "│"},
                     { Position::LEFTMID,     "├"},
                     { Position::MID,         "─"},
                     { Position::MIDMID,      "┼"},
-                    { Position::RIGHT,      "│"},
+                    { Position::RIGHT,       "│"},
                     { Position::RIGHTMID,    "┤"}
                 };
                 
@@ -128,35 +128,36 @@ namespace Cli {
 
     class Utils {
 
-        /**
-         * @brief Repeats a string x times 
-         * @param [int] x 
-         * @param [std::string] str
-         * @return [std::string]
-         **/
+        public:
+            /**
+             * @brief Repeats a string x times 
+             * @param [int] x 
+             * @param [std::string] str
+             * @return [std::string]
+             **/
 
-        std::string& repeats(std::string& str, const int x);
+            static std::string& repeats(std::string& str, const int x);
 
-        /**
-         * @brief Pads a string according to a direction
-         * @param [std::string] str
-         * @param [int] len 
-         * @param [int] pad
-         * @param [Cli::Direction] dir
-         * @return [std::string]
-         **/
+            /**
+             * @brief Pads a string according to a direction
+             * @param [std::string] str
+             * @param [char] len, the length of the padding 
+             * @param [int] padChar, the character to use for padding
+             * @param [Cli::Direction] dir, the direction of the padding
+             * @return [std::string]
+             **/
 
-        std::string& pad(std::string& str, const int len,const int pad, const Cli::Direction dir);
+            static std::string& pad(std::string& str, const int len,const char padChar, const Cli::Direction dir);
 
-        /**
-         * @brief truncates the given string 
-         * @param [std::string] str
-         * @param [int] len
-         * @param [std::string] chr, the char to put after the truncation
-         * @return [std::string]
-         **/
+            /**
+             * @brief truncates the given string 
+             * @param [std::string] str
+             * @param [int] len
+             * @param [std::string] chr, the char to put after the truncation
+             * @return [std::string]
+             **/
 
-        std::string& truncate(std::string& str, int len, const std::string& chr);
+            static std::string& truncate(std::string& str, const int len, const std::string& chr);
 
     };
 
