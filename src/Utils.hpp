@@ -136,7 +136,7 @@ namespace Cli {
              * @return [std::string]
              **/
 
-            static std::string& repeats(std::string& str, const int x);
+            static std::string repeats(std::string str, const int x);
 
             /**
              * @brief Pads a string according to a direction

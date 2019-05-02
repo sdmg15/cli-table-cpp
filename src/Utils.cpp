@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-std::string& Cli::Utils::repeats(std::string& str, const int x){
+std::string Cli::Utils::repeats(std::string str, const int x){
 
     std::string res;
 
