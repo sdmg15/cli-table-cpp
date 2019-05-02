@@ -118,3 +118,73 @@ int Cli::Table::getMaxWidth(int columnPos){
     }
     return max;
 }
+
+
+void Cli::Table::generate() {
+
+    auto opt = this->getOpt().m_positionChars;
+
+    std::ostream_iterator<std::string> out(std::cout,"\n");   
+    std::string res ;
+
+    for(int i(0); i < m_head.size(); ++i){
+
+        std::string currentStr(m_head.at(i));
+        int maxWidth = this->getMaxWidth(i);
+
+        Cli::Utils::pad(currentStr, currentStr.size()+2,' ',Cli::Direction::LEFT);
+
+        // The remaining length to reach the end of a cell caracter 
+
+        int remaining = std::abs( static_cast<int>( maxWidth - currentStr.size() + 2) ); 
+ 
+        Cli::Utils::pad(currentStr, currentStr.size() + remaining ,' ',Cli::Direction::RIGHT);
+
+        currentStr =  (i==0) ? opt[Cli::Position::LEFT] + currentStr + opt[Cli::Position::RIGHT]
+                             : "" + currentStr + opt[Cli::Position::RIGHT];
+
+        res+=currentStr;
+    }
+
+    res+="\n";
+    res+= drawBottomLine(false);
+    res+= "\n";
+
+    for(int i(0); i < m_body.size(); ++i){
+
+        for( int j(0); j < m_body[0].size(); ++j){
+
+            int maxWidth = this->getMaxWidth(j);
+
+            std::string currentStr(m_body[i][j]);  
+
+            Cli::Utils::pad(currentStr, currentStr.size() + 2,' ',Cli::Direction::LEFT);
+
+            int remaining = std::abs( static_cast<int>( maxWidth - currentStr.size() + 2) ); 
+
+            Cli::Utils::pad(currentStr, currentStr.size() + remaining ,' ',Cli::Direction::RIGHT);
+
+            if( j == 0 ){
+                currentStr =  opt[Cli::Position::LEFT] + currentStr + opt[Cli::Position::RIGHT];
+            }else{
+                currentStr =  currentStr + opt[Cli::Position::RIGHT];
+            }
+
+            res+= currentStr;    
+
+        }
+
+            if( i != m_body.size()-1 ) {
+                 res+="\n";
+                 res+= drawBottomLine(false);
+                 res+="\n";
+            }
+
+    }
+
+     *out = drawTopLine();
+     *out = res;
+     *out = drawBottomLine(true);
+     //*out = lineBottom;
+
+}
