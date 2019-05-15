@@ -1,2 +1,32 @@
 # cli-table-cpp
 Pretty unicode tables for the CLI with CPP
+
+I was looking for a simple and beautiful unicode table for the CLI for a toy 
+project written in C++ but didn't found one that satisfy my needs then I build one :smile:
+Base on this JavaScript project.
+
+# Compiling and Running the tests 
+
+  ## Requirements 
+
+  - CMAKE 3.10 or greater
+  - Clang or G++ 7.3.0 (That supports C++17)
+  - Conan - C++ package manager, needed if you want to run tests
+  
+## Compiling 
+
+If all requirements are met then you can build using cmake :
+``` cmake --build . ```
+The resulting binary will be the located in the `bin` folder.
+
+# Result after running binary
+
+Here is the result in image of what you can get after running the tests or after your own customization: 
+
+![Result](images/example_one.png)
+  
+# Contributing 
+
+If you found a bug or want to add a new feature, create a new branch and work on it 
+after when it's ready open a pull request and after reviewing the branch will be merge into the master 
+branch.
