@@ -159,6 +159,7 @@ namespace Cli {
 
             static std::string& truncate(std::string& str, const int len, const std::string& chr);
 
+            static std::vector<std::string> split(std::string str, const char delimiter); 
     };
 
 } // namespace Cli

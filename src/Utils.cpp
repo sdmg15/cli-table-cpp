@@ -1,6 +1,7 @@
 #include "Utils.hpp"
 #include <algorithm>
 #include <string>
+#include <sstream>
 #include <iostream>
 
 std::string Cli::Utils::repeats(std::string str, const int x){
@@ -52,4 +53,18 @@ std::string& Cli::Utils::truncate(std::string& str, const int len,const std::str
         str = str.substr(0, len - truncateStr.size()) + truncateStr ; 
     }
     return str; 
+}
+
+std::vector<std::string> Cli::Utils::split(std::string str, const char delimiter){
+
+    std::vector<std::string> internal;
+    std::stringstream ss(str); // Turn the string into a stream.
+    std::string tok;
+    
+    while(getline(ss, tok, delimiter)) {
+        internal.push_back(tok);
+    }
+    
+    return internal;
+
 }
