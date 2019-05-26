@@ -3,7 +3,7 @@ Pretty unicode tables for the CLI with CPP
 
 I was looking for a simple and beautiful unicode table for the CLI for a toy 
 project written in C++ but didn't found one that satisfy my needs then I build one :smile:
-Base on this JavaScript project.
+Base on this [JavaScript project](https://github.com/Automattic/cli-table) .
 
 # Compiling and Running the tests 
 
