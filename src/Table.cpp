@@ -147,7 +147,7 @@ void Cli::Table::generate() {
         }
 
         for(auto& matrixElem : rowMatrixToPrint){
-
+                 
             for(auto& stringElem : matrixElem ){
 
                     Cli::Utils::pad(stringElem, stringElem.size()+2,' ',Cli::Direction::LEFT);
@@ -158,6 +158,9 @@ void Cli::Table::generate() {
                                         : "" + stringElem + opt[Cli::Position::RIGHT];
                     ++i;
             }
+            if(  rowMatrixToPrint.size() > 1){
+                tmpStr += "\n";
+            }
 
             i = 0; // Resetting to 0 for restarting the process 
           
@@ -165,7 +168,7 @@ void Cli::Table::generate() {
          *out = tmpStr;
          tmpStr.clear();
         // Before moving to the next matrix, we print the current one
- 
+        
 
         if( j != rowsList.size()-1){
             *out = drawBottomLine(false);
@@ -191,8 +194,8 @@ std::vector<RowMatrix> Cli::Table::processCells(){
 
                 std::string currentStr(m_body[i].at(j));
 
-                int maxWidth = this->getMaxWidth(j);
-                int maxHeight = this->getMaxHeight(j,false);
+                int maxWidth = this->getMaxWidth(j); // For same columns 
+                int maxHeight = this->getMaxHeight(i,false); // For same rows 
 
                 int currentStrHeight = this->countEndl( currentStr );
                 auto splittedString = Cli::Utils::split(currentStr,'\n');
@@ -214,13 +217,13 @@ std::vector<RowMatrix> Cli::Table::processCells(){
 
              rowMatrix.push_back(splittedString);
          }
-    
+
         this->transpose( rowMatrix );
         rowsList.push_back( rowMatrix ); 
         rowMatrix.clear();
     }
 
-  
+
     return rowsList;
   
 }
