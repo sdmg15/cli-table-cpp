@@ -1,12 +1,13 @@
 
 #include <string>
 #include <vector>
+#include <numeric>
 #include <algorithm> 
 #include "Table.hpp"
 
 
- Cli::Table::Table(Cli::Options& opt, const std::vector<std::string>& head,TableBody& body)
-            :m_opt(opt),m_body(body),m_head(head){};
+ Cli::Table::Table(Cli::Options& opt,TableBody& body)
+            :m_opt(opt),m_body(body){};
 
  Cli::Table::~Table(){};
  
@@ -37,18 +38,16 @@ std::string Cli::Table::drawTopLine(){
     auto opt = this->getOpt().m_positionChars;
 
     std::string lineTop = opt[Cli::Position::TOPLEFT] ;
-        
-    for(int i(0); i < m_head.size(); ++i){
-        
-        int maxWidth = this->m_maxWidths.at(i);
 
-        int lineEndPosition = maxWidth;
-
-        lineTop += Cli::Utils::repeats(opt[Cli::Position::TOP], lineEndPosition+ 4);
-        // When we are at the corner we put the TOPRIGHT char else we put the TOPMID
-        lineTop += (i!=m_head.size()-1)? opt[Cli::Position::TOPMID]: opt[Cli::Position::TOPRIGHT];
+    for(int i(0);i< m_maxWidths.size() - 1; ++i){
+         lineTop += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.at(i)+4);
+         lineTop += opt[Cli::Position::TOPMID];
     }
+    lineTop += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.back() +4) ;
 
+    lineTop += opt[Cli::Position::TOPRIGHT];
+    
+    
     return lineTop;
 }
 
@@ -58,24 +57,29 @@ std::string Cli::Table::drawBottomLine(bool isLast){
        
     std::string lineBottom = [&](){ return (isLast)? opt[Cli::Position::BOTTOMLEFT]: opt[Cli::Position::LEFTMID]; }();
             
-    for(int i(0); i < m_head.size(); ++i){
+    for(int i(0); i < m_maxWidths.size() - 1; ++i){
         
         int maxWidth = this->m_maxWidths.at( i );
         
         int lineEndPosition = maxWidth+4 ; 
 
-        if( isLast){
-
-            lineBottom += Cli::Utils::repeats(opt[Cli::Position::BOTTOM],lineEndPosition);
-
-            lineBottom += (i!=m_head.size()-1)? opt[Cli::Position::BOTTOMMID] : opt[Cli::Position::BOTTOMRIGHT];
+        if( isLast ){
+            lineBottom += Cli::Utils::repeats(opt[Cli::Position::BOTTOM], m_maxWidths.at(i)+4);
+            lineBottom += opt[Cli::Position::BOTTOMMID];
         }else{
-
-            lineBottom += Cli::Utils::repeats(opt[Cli::Position::BOTTOM],lineEndPosition);
-
-            lineBottom += (i!=m_head.size()-1)? opt[Cli::Position::MIDMID] : opt[Cli::Position::RIGHTMID];
+            lineBottom += Cli::Utils::repeats(opt[Cli::Position::BOTTOM], m_maxWidths.at(i)+4);
+            lineBottom += opt[Cli::Position::MIDMID];
         }
     }
+
+    if( isLast ){
+        lineBottom += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.back() +4) ;
+        lineBottom += opt[Cli::Position::BOTTOMRIGHT];
+    }else{
+        lineBottom += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.back() +4) ;
+        lineBottom += opt[Cli::Position::RIGHTMID];
+    }
+    
     return lineBottom;
 }
 
@@ -165,7 +169,7 @@ void Cli::Table::generate() {
             i = 0; // Resetting to 0 for restarting the process 
           
         }
-         *out = tmpStr;
+         std::cout << tmpStr ;
          tmpStr.clear();
         // Before moving to the next matrix, we print the current one
         
@@ -174,9 +178,7 @@ void Cli::Table::generate() {
             *out = drawBottomLine(false);
             drawTop = false;
             ++j;
-        }else{
-            drawTop = true;
-        }
+        } 
     }
     *out = drawBottomLine(true);
 }
