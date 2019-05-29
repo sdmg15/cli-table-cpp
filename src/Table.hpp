@@ -23,7 +23,7 @@ namespace Cli {
 
      public:
 
-        Table(Options& opt,const std::vector<std::string>& head,TableBody& body);
+        Table(Options& opt,TableBody& body);
         virtual ~Table();
 
         /**
