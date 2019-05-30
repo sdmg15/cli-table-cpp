@@ -169,7 +169,12 @@ void Cli::Table::generate() {
             i = 0; // Resetting to 0 for restarting the process 
           
         }
+         
+         if( rowMatrixToPrint.size() <= 1){
+            tmpStr+="\n";
+         }
          std::cout << tmpStr ;
+         
          tmpStr.clear();
         // Before moving to the next matrix, we print the current one
         
