@@ -16,14 +16,50 @@ Base on this [JavaScript project](https://github.com/Automattic/cli-table) .
 ## Compiling 
 
 If all requirements are met then you can build using cmake :
+
 ``` cmake --build . ```
+
 The resulting binary will be the located in the `bin` folder.
 
+## Basics usage 
+
+You need first to include the header files `Table.hpp` and `Utils.hpp`.
+
+```cpp
+
+    #include <iostream>
+    #include "Table.hpp"
+    #include <string>
+
+    // Options for the table to draw
+    Cli::opt opt;
+    // Contructing the table structure
+    TableBody content = {
+                            { "value \nmultilines ?"     ,        "Nope \njust \ntesting" },
+                            { "value Yes\n are you sure?" ,              "Teufy"      },
+                            { "This \nis me !"         ,     "Heuh \nanother one"  },
+                            { "value \nmultilines ?"     ,        "Nope \njust \ntesting" },
+                            { "value Yes\n are you sure?" ,              "Teufy"      },
+                        };
+    // Or you can use the push() method 
+
+    content.push( { "This \nis me !"         ,     "Heuh \nanother one"  }, );
+
+    Cli::Table table(opt,content);
+    //Generating the final table 
+
+    table.generate();
+    
+```
+
+     
 # Result after running binary
 
 Here is the result in image of what you can get after running the tests or after your own customization: 
 
 ![Result](images/example_one.png)
+
+![Result Multilines](images/example_two.png)
   
 # Contributing 
 
