@@ -21,7 +21,7 @@ If all requirements are met then you can build using cmake :
 
 The resulting binary will be the located in the `bin` folder.
 
-## Basics usage 
+## Basic usage 
 
 You need first to include the header files `Table.hpp` and `Utils.hpp`.
 
@@ -29,6 +29,7 @@ You need first to include the header files `Table.hpp` and `Utils.hpp`.
 
     #include <iostream>
     #include "Table.hpp"
+    #include "Utils.hpp"
     #include <string>
 
     // Options for the table to draw
