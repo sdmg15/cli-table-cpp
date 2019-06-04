@@ -24,8 +24,7 @@ namespace Cli {
      public:
 
         Table(Options& opt,TableBody& body);
-        virtual ~Table();
-
+        
         /**
          * @brief Add a new entry to the table 
          * @param [std::string] 

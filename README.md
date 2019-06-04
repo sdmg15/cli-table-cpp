@@ -33,7 +33,7 @@ You need first to include the header files `Table.hpp` and `Utils.hpp`.
     #include <string>
 
     // Options for the table to draw
-    Cli::opt opt;
+    Cli::Options opt;
     // Contructing the table structure
     TableBody content = {
                             { "value \nmultilines ?"     ,        "Nope \njust \ntesting" },
