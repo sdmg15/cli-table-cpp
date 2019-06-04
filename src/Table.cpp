@@ -9,9 +9,6 @@
  Cli::Table::Table(Cli::Options& opt,TableBody& body)
             :m_opt(opt),m_body(body){};
 
- Cli::Table::~Table(){};
- 
-
  void Cli::Table::push(std::vector<std::string>& elem){
     m_body.push_back(elem);
  }
