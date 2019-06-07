@@ -21,6 +21,12 @@ If all requirements are met then you can build using cmake :
 
 The resulting binary will be the located in the `bin` folder.
 
+To run test with **make**
+
+```
+make build run clean
+``` 
+
 ## Basics usage 
 
 You need first to include the header files `Table.hpp` and `Utils.hpp`.
@@ -32,7 +38,7 @@ You need first to include the header files `Table.hpp` and `Utils.hpp`.
     #include <string>
 
     // Options for the table to draw
-    Cli::opt opt;
+    Cli::Options opt;
     // Contructing the table structure
     TableBody content = {
                             { "value \nmultilines ?"     ,        "Nope \njust \ntesting" },
@@ -41,9 +47,8 @@ You need first to include the header files `Table.hpp` and `Utils.hpp`.
                             { "value \nmultilines ?"     ,        "Nope \njust \ntesting" },
                             { "value Yes\n are you sure?" ,              "Teufy"      },
                         };
-    // Or you can use the push() method 
-
-    content.push( { "This \nis me !"         ,     "Heuh \nanother one"  }, );
+    // Or you can use the push_back() method 
+    content.push_back( { "This \nis me !"         ,     "Heuh \nanother one"  } );
 
     Cli::Table table(opt,content);
     //Generating the final table 
