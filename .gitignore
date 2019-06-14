@@ -42,4 +42,3 @@ bin/
 *.cbp
 cmake_install.cmake 
 CMakeFiles/
-Makefile
