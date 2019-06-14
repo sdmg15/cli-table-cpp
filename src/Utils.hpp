@@ -136,7 +136,7 @@ namespace Cli {
              * @return [std::string]
              **/
 
-            static std::string repeats(std::string str, const int x);
+            static auto repeats(std::string str, const int x) -> std::string;
 
             /**
              * @brief Pads a string according to a direction
@@ -147,7 +147,8 @@ namespace Cli {
              * @return [std::string]
              **/
 
-            static std::string& pad(std::string& str, const int len,const char padChar, const Cli::Direction dir);
+            static auto pad(std::string& str, const int len,
+                            const char padChar, const Cli::Direction dir) -> std::string&;
 
             /**
              * @brief truncates the given string 
@@ -157,9 +158,9 @@ namespace Cli {
              * @return [std::string]
              **/
 
-            static std::string& truncate(std::string& str, const int len, const std::string& chr);
+            static auto truncate(std::string& str, const int len, const std::string& chr) -> std::string&;
 
-            static std::vector<std::string> split(std::string str, const char delimiter); 
+            static auto split(std::string str, const char delimiter) -> std::vector<std::string>; 
     };
 
 } // namespace Cli

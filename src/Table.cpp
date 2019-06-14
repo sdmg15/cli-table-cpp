@@ -13,24 +13,24 @@
     m_body.push_back(elem);
  }
 
-std::vector<std::string> Cli::Table::getHead() const{
+auto Cli::Table::getHead() const -> std::vector<std::string> {
     return m_head;
 }
 
-TableBody Cli::Table::getBody() const {
+auto Cli::Table::getBody() const -> TableBody {
     return m_body;
 }
 
-Cli::Options Cli::Table::getOpt() const {
+auto Cli::Table::getOpt() const -> Cli::Options {
     return m_opt;
 }
 
-std::string& Cli::Table::renderWithStyles(std::string& str){
+auto Cli::Table::renderWithStyles(std::string& str) -> std::string&{
     // Will have an option where to set padding,truncation, colors etc.
     // As of now we can just render with some default styles
 }
 
-std::string Cli::Table::drawTopLine(){
+auto Cli::Table::drawTopLine() -> std::string{
 
     auto opt = this->getOpt().m_positionChars;
 
@@ -49,7 +49,7 @@ std::string Cli::Table::drawTopLine(){
 }
 
 
-std::string Cli::Table::drawBottomLine(bool isLast){
+auto Cli::Table::drawBottomLine(bool isLast) -> std::string {
     auto opt = this->getOpt().m_positionChars;
        
     std::string lineBottom = [&](){ return (isLast)? opt[Cli::Position::BOTTOMLEFT]: opt[Cli::Position::LEFTMID]; }();
@@ -81,7 +81,7 @@ std::string Cli::Table::drawBottomLine(bool isLast){
 }
 
 
-int Cli::Table::getMaxWidth(int columnPos){
+auto Cli::Table::getMaxWidth(int columnPos) -> int{
 
     int max = 0;
     auto tmpBody = m_body;
@@ -102,7 +102,7 @@ int Cli::Table::getMaxWidth(int columnPos){
     return max;
 }
 
-int Cli::Table::getMaxHeight(int rowPos, bool isHead) {
+auto Cli::Table::getMaxHeight(int rowPos, bool isHead) -> int {
     
     auto tmpBody = m_body;
     int max = 0 ;
@@ -118,7 +118,7 @@ int Cli::Table::getMaxHeight(int rowPos, bool isHead) {
     return max;
 }
 
-int Cli::Table::countEndl(const std::string& str) const {
+auto Cli::Table::countEndl(const std::string& str) const -> int {
 
     int count = std::count_if( str.begin(),str.end(), [](char c){ return c == '\n';});
     return count ;
@@ -185,7 +185,7 @@ void Cli::Table::generate() {
     *out = drawBottomLine(true);
 }
 
-std::vector<RowMatrix> Cli::Table::processCells(){
+auto Cli::Table::processCells() -> std::vector<RowMatrix> {
 
     auto opt = this->getOpt().m_positionChars;
     RowMatrix rowMatrix;
