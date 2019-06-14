@@ -33,11 +33,11 @@ namespace Cli {
 
         void push(std::vector<std::string>& elem);
 
-        TableBody getBody() const;
+        auto getBody() const -> TableBody;
 
-        Options getOpt() const ;
+        auto getOpt() const -> Options;
 
-        std::vector<std::string> getHead() const;
+        auto getHead() const -> std::vector<std::string>;
 
         /**
          * @brief Apply style to the given string
@@ -45,14 +45,14 @@ namespace Cli {
          * @return [std::string]
          **/
 
-        std::string& renderWithStyles(std::string& str);
+        auto renderWithStyles(std::string& str) -> std::string& ;
 
         /**
          * @brief Draw the top line with the given options
          * @return [std::string]
          **/
 
-        std::string drawTopLine();
+        auto drawTopLine() -> std::string;
 
         /**
          * @brief Draw the bottom line 
@@ -60,7 +60,7 @@ namespace Cli {
          * @return [std::string]
          **/
 
-        std::string drawBottomLine(bool isLast);
+        auto drawBottomLine(bool isLast) -> std::string;
 
 
         /**
@@ -75,7 +75,7 @@ namespace Cli {
          *  @return [int]
          **/
 
-        int getMaxWidth(int columnPos);
+        auto getMaxWidth(int columnPos) -> int;
 
         /** @brief Get the max heigh of the given table row
          *  @warning We are not taking in charge truncation as of now 
@@ -83,20 +83,20 @@ namespace Cli {
          *  @return [int]
          **/
 
-        int getMaxHeight(int rowPos,bool isHead);
+        auto getMaxHeight(int rowPos,bool isHead) -> int;
 
         /** @brief Count the number of new lines in a given string 
          *  @param [std::string] str the given string 
          *  @return [int]
          **/
 
-        int countEndl(const std::string& str) const;
+        auto countEndl(const std::string& str) const -> int;
         
         /** @brief Process the table to return a vector of rows
          *  @return [std::vector<RowMatrix>]
          **/
 
-        std::vector<RowMatrix> processCells();
+        auto processCells() -> std::vector<RowMatrix>;
 
         /** @brief Transpose the given matrix
          *  @param [std::vector<std::vector<std::string>> ] matrix
