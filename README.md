@@ -11,13 +11,33 @@ Base on this [JavaScript project](https://github.com/Automattic/cli-table) .
 
   - CMAKE 3.10 or greater
   - Clang or G++ 7.3.0 (That supports C++17)
-  - Conan - C++ package manager, needed if you want to run tests
+  - Conan - C++ package manager
   
 ## Compiling 
 
 If all requirements are met then you can build using cmake :
 
-``` cmake --build . ```
+Create a build directory and change to it : 
+
+`mkdir build && cd build`
+
+
+Then install dependencies that are located in the `conanfile.txt` by running 
+
+`conan install ..`
+
+Then run the command according to the targetted OS 
+
+```s
+(win)
+$ cmake .. -G "Visual Studio 15 Win64"
+$ cmake --build . --config Release
+
+(linux, mac)
+$ cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+$ cmake --build ..
+
+```
 
 The resulting binary will be the located in the `bin` folder.
 
