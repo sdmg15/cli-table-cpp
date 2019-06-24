@@ -8,10 +8,10 @@
 #include <iterator>
 #include "Utils.hpp"
 
-using TableBody = std::vector< std::vector<std::string> >;
-using RowMatrix  = std::vector< std::vector<std::string> >;
-
 namespace CliTable {
+
+    using TableBody = std::vector< std::vector<std::string> >;
+    using RowMatrix  = std::vector< std::vector<std::string> >;
 
     class Table {
     
@@ -23,7 +23,7 @@ namespace CliTable {
 
      public:
 
-        Table(Options& opt,TableBody& body);
+        Table(Options opt,TableBody body);
         
         /**
          * @brief Add a new entry to the table 
@@ -31,7 +31,7 @@ namespace CliTable {
          * @return void 
          **/
 
-        void push(std::vector<std::string>& elem);
+        void push(std::vector<std::string> elem);
 
         auto getBody() const -> TableBody;
 

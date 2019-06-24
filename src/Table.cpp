@@ -6,11 +6,11 @@
 #include "Table.hpp"
 
 
- CliTable::Table::Table(CliTable::Options& opt,TableBody& body)
-            :m_opt(opt),m_body(body){};
+ CliTable::Table::Table(CliTable::Options opt,TableBody body)
+            :m_opt( std::move(opt) ),m_body( std::move(body) ) {};
 
- void CliTable::Table::push(std::vector<std::string>& elem){
-    m_body.push_back(elem);
+ void CliTable::Table::push(std::vector<std::string> elem){
+    m_body.push_back( std::move(elem) );
  }
 
 auto CliTable::Table::getHead() const -> std::vector<std::string> {
