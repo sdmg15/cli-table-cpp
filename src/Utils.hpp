@@ -6,7 +6,7 @@
 #include <map>
 #include <vector>
 
-namespace Cli {
+namespace CliTable {
 
     enum class Direction{
         LEFT,
@@ -35,7 +35,7 @@ namespace Cli {
 
     struct Options {
 
-        std::map<Cli::Position, std::string> m_positionChars;
+        std::map<CliTable::Position, std::string> m_positionChars;
         std::string m_truncate;
         std::vector<int> m_colWidths;
         std::vector<int> m_colAligns;
@@ -45,7 +45,7 @@ namespace Cli {
             this->init();
         }
 
-        Options(std::map<Cli::Position,std::string> pos, const std::string& truncate,
+        Options(std::map<CliTable::Position,std::string> pos, const std::string& truncate,
                 std::vector<int> colWidths, 
                 std::vector<int> colAligns ){
                     
@@ -58,20 +58,20 @@ namespace Cli {
 
                 }
 
-        Options(std::map<Cli::Position,std::string> pos){
+        Options(std::map<CliTable::Position,std::string> pos){
           
             this->init();
             mergePositionsWithDefaults(pos);
         }
 
-        Options(std::map<Cli::Position, std::string> pos, const std::string& truncate){
+        Options(std::map<CliTable::Position, std::string> pos, const std::string& truncate){
 
             this->init();
             mergePositionsWithDefaults(pos);
             m_truncate = truncate;
         }
 
-        Options(std::map<Cli::Position, std::string> pos, std::vector<int> colWidths, std::vector<int> colAligns){
+        Options(std::map<CliTable::Position, std::string> pos, std::vector<int> colWidths, std::vector<int> colAligns){
 
                 this->init();
                 mergePositionsWithDefaults(pos);
@@ -85,10 +85,10 @@ namespace Cli {
 
             /**
              * @brief Merge user positions with defaults 
-             * @param [std::map<Cli::Position,char>] positions
+             * @param [std::map<CliTable::Position,char>] positions
              **/
 
-            void mergePositionsWithDefaults(const std::map<Cli::Position,std::string>& positions){
+            void mergePositionsWithDefaults(const std::map<CliTable::Position,std::string>& positions){
                 
                 for(const auto& position: positions){
                     m_positionChars[position.first] = position.second;
@@ -143,12 +143,12 @@ namespace Cli {
              * @param [std::string] str
              * @param [char] len, the length of the padding 
              * @param [int] padChar, the character to use for padding
-             * @param [Cli::Direction] dir, the direction of the padding
+             * @param [CliTable::Direction] dir, the direction of the padding
              * @return [std::string]
              **/
 
             static auto pad(std::string& str, const int len,
-                            const char padChar, const Cli::Direction dir) -> std::string&;
+                            const char padChar, const CliTable::Direction dir) -> std::string&;
 
             /**
              * @brief truncates the given string 
@@ -163,6 +163,6 @@ namespace Cli {
             static auto split(std::string str, const char delimiter) -> std::vector<std::string>; 
     };
 
-} // namespace Cli
+} // namespace CliTable
 
 #endif

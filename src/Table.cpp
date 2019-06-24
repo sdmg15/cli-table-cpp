@@ -6,53 +6,53 @@
 #include "Table.hpp"
 
 
- Cli::Table::Table(Cli::Options& opt,TableBody& body)
+ CliTable::Table::Table(CliTable::Options& opt,TableBody& body)
             :m_opt(opt),m_body(body){};
 
- void Cli::Table::push(std::vector<std::string>& elem){
+ void CliTable::Table::push(std::vector<std::string>& elem){
     m_body.push_back(elem);
  }
 
-auto Cli::Table::getHead() const -> std::vector<std::string> {
+auto CliTable::Table::getHead() const -> std::vector<std::string> {
     return m_head;
 }
 
-auto Cli::Table::getBody() const -> TableBody {
+auto CliTable::Table::getBody() const -> TableBody {
     return m_body;
 }
 
-auto Cli::Table::getOpt() const -> Cli::Options {
+auto CliTable::Table::getOpt() const -> CliTable::Options {
     return m_opt;
 }
 
-auto Cli::Table::renderWithStyles(std::string& str) -> std::string&{
+auto CliTable::Table::renderWithStyles(std::string& str) -> std::string&{
     // Will have an option where to set padding,truncation, colors etc.
     // As of now we can just render with some default styles
 }
 
-auto Cli::Table::drawTopLine() -> std::string{
+auto CliTable::Table::drawTopLine() -> std::string{
 
     auto opt = this->getOpt().m_positionChars;
 
-    std::string lineTop = opt[Cli::Position::TOPLEFT] ;
+    std::string lineTop = opt[CliTable::Position::TOPLEFT] ;
 
     for(int i(0);i< m_maxWidths.size() - 1; ++i){
-         lineTop += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.at(i)+4);
-         lineTop += opt[Cli::Position::TOPMID];
+         lineTop += CliTable::Utils::repeats(opt[CliTable::Position::TOP], m_maxWidths.at(i)+4);
+         lineTop += opt[CliTable::Position::TOPMID];
     }
-    lineTop += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.back() +4) ;
+    lineTop += CliTable::Utils::repeats(opt[CliTable::Position::TOP], m_maxWidths.back() +4) ;
 
-    lineTop += opt[Cli::Position::TOPRIGHT];
+    lineTop += opt[CliTable::Position::TOPRIGHT];
     
     
     return lineTop;
 }
 
 
-auto Cli::Table::drawBottomLine(bool isLast) -> std::string {
+auto CliTable::Table::drawBottomLine(bool isLast) -> std::string {
     auto opt = this->getOpt().m_positionChars;
        
-    std::string lineBottom = [&](){ return (isLast)? opt[Cli::Position::BOTTOMLEFT]: opt[Cli::Position::LEFTMID]; }();
+    std::string lineBottom = [&](){ return (isLast)? opt[CliTable::Position::BOTTOMLEFT]: opt[CliTable::Position::LEFTMID]; }();
             
     for(int i(0); i < m_maxWidths.size() - 1; ++i){
         
@@ -61,27 +61,27 @@ auto Cli::Table::drawBottomLine(bool isLast) -> std::string {
         int lineEndPosition = maxWidth+4 ; 
 
         if( isLast ){
-            lineBottom += Cli::Utils::repeats(opt[Cli::Position::BOTTOM], m_maxWidths.at(i)+4);
-            lineBottom += opt[Cli::Position::BOTTOMMID];
+            lineBottom += CliTable::Utils::repeats(opt[CliTable::Position::BOTTOM], m_maxWidths.at(i)+4);
+            lineBottom += opt[CliTable::Position::BOTTOMMID];
         }else{
-            lineBottom += Cli::Utils::repeats(opt[Cli::Position::BOTTOM], m_maxWidths.at(i)+4);
-            lineBottom += opt[Cli::Position::MIDMID];
+            lineBottom += CliTable::Utils::repeats(opt[CliTable::Position::BOTTOM], m_maxWidths.at(i)+4);
+            lineBottom += opt[CliTable::Position::MIDMID];
         }
     }
 
     if( isLast ){
-        lineBottom += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.back() +4) ;
-        lineBottom += opt[Cli::Position::BOTTOMRIGHT];
+        lineBottom += CliTable::Utils::repeats(opt[CliTable::Position::TOP], m_maxWidths.back() +4) ;
+        lineBottom += opt[CliTable::Position::BOTTOMRIGHT];
     }else{
-        lineBottom += Cli::Utils::repeats(opt[Cli::Position::TOP], m_maxWidths.back() +4) ;
-        lineBottom += opt[Cli::Position::RIGHTMID];
+        lineBottom += CliTable::Utils::repeats(opt[CliTable::Position::TOP], m_maxWidths.back() +4) ;
+        lineBottom += opt[CliTable::Position::RIGHTMID];
     }
     
     return lineBottom;
 }
 
 
-auto Cli::Table::getMaxWidth(int columnPos) -> int{
+auto CliTable::Table::getMaxWidth(int columnPos) -> int{
 
     int max = 0;
     auto tmpBody = m_body;
@@ -89,7 +89,7 @@ auto Cli::Table::getMaxWidth(int columnPos) -> int{
 
     for(int i(0); i < tmpBody.size();++i){
         
-        auto vecSplittedString = Cli::Utils::split( tmpBody[i][columnPos],'\n');
+        auto vecSplittedString = CliTable::Utils::split( tmpBody[i][columnPos],'\n');
         
         for( const auto& str : vecSplittedString){
 
@@ -102,7 +102,7 @@ auto Cli::Table::getMaxWidth(int columnPos) -> int{
     return max;
 }
 
-auto Cli::Table::getMaxHeight(int rowPos, bool isHead) -> int {
+auto CliTable::Table::getMaxHeight(int rowPos, bool isHead) -> int {
     
     auto tmpBody = m_body;
     int max = 0 ;
@@ -118,14 +118,14 @@ auto Cli::Table::getMaxHeight(int rowPos, bool isHead) -> int {
     return max;
 }
 
-auto Cli::Table::countEndl(const std::string& str) const -> int {
+auto CliTable::Table::countEndl(const std::string& str) const -> int {
 
     int count = std::count_if( str.begin(),str.end(), [](char c){ return c == '\n';});
     return count ;
 }
 
 
-void Cli::Table::generate() {
+void CliTable::Table::generate() {
 
     auto opt = this->getOpt().m_positionChars;
     auto rowsList = this->processCells();
@@ -151,12 +151,12 @@ void Cli::Table::generate() {
                  
             for(auto& stringElem : matrixElem ){
 
-                    Cli::Utils::pad(stringElem, stringElem.size()+2,' ',Cli::Direction::LEFT);
+                    CliTable::Utils::pad(stringElem, stringElem.size()+2,' ',CliTable::Direction::LEFT);
                     // The remaining length to reach the end of a cell character 
                     int remaining = std::abs( static_cast<int>( maxWidths.at(i) - stringElem.size() + 4) ); 
-                    Cli::Utils::pad(stringElem, stringElem.size() + remaining ,' ',Cli::Direction::RIGHT);
-                    tmpStr +=  (i==0) ? opt[Cli::Position::LEFT] + stringElem + opt[Cli::Position::RIGHT]
-                                        : "" + stringElem + opt[Cli::Position::RIGHT];
+                    CliTable::Utils::pad(stringElem, stringElem.size() + remaining ,' ',CliTable::Direction::RIGHT);
+                    tmpStr +=  (i==0) ? opt[CliTable::Position::LEFT] + stringElem + opt[CliTable::Position::RIGHT]
+                                        : "" + stringElem + opt[CliTable::Position::RIGHT];
                     ++i;
             }
             if(  rowMatrixToPrint.size() > 1){
@@ -185,7 +185,7 @@ void Cli::Table::generate() {
     *out = drawBottomLine(true);
 }
 
-auto Cli::Table::processCells() -> std::vector<RowMatrix> {
+auto CliTable::Table::processCells() -> std::vector<RowMatrix> {
 
     auto opt = this->getOpt().m_positionChars;
     RowMatrix rowMatrix;
@@ -202,7 +202,7 @@ auto Cli::Table::processCells() -> std::vector<RowMatrix> {
                 int maxHeight = this->getMaxHeight(i,false); // For same rows 
 
                 int currentStrHeight = this->countEndl( currentStr );
-                auto splittedString = Cli::Utils::split(currentStr,'\n');
+                auto splittedString = CliTable::Utils::split(currentStr,'\n');
 
                 int diffHeight = maxHeight - currentStrHeight;
                 int k{0};
@@ -233,7 +233,7 @@ auto Cli::Table::processCells() -> std::vector<RowMatrix> {
 }
 
 
-auto Cli::Table::maxColumn(int column, RowMatrix& matrix) -> int {
+auto CliTable::Table::maxColumn(int column, RowMatrix& matrix) -> int {
 
      int max{0};
 
@@ -248,7 +248,7 @@ auto Cli::Table::maxColumn(int column, RowMatrix& matrix) -> int {
 
 }
 
-auto Cli::Table::computeMaxWidths( std::vector<RowMatrix>& rowMatrix) -> std::vector<int>{
+auto CliTable::Table::computeMaxWidths( std::vector<RowMatrix>& rowMatrix) -> std::vector<int>{
     
     int vecSize = rowMatrix[0][0].size(); 
     
@@ -275,7 +275,7 @@ auto Cli::Table::computeMaxWidths( std::vector<RowMatrix>& rowMatrix) -> std::ve
 
 } 
 
-void Cli::Table::transpose(std::vector< std::vector<std::string> >& matrix ){
+void CliTable::Table::transpose(std::vector< std::vector<std::string> >& matrix ){
 
     std::vector< std::vector<std::string> > trans(matrix[0].size(),std::vector<std::string>());
 

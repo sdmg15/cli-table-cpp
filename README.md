@@ -58,7 +58,7 @@ You need first to include the header files `Table.hpp` and `Utils.hpp`.
     #include <string>
 
     // Options for the table to draw
-    Cli::Options opt;
+    CliTable::Options opt;
     // Contructing the table structure
     TableBody content = {
                             { "value \nmultilines ?"     ,        "Nope \njust \ntesting" },
@@ -70,7 +70,7 @@ You need first to include the header files `Table.hpp` and `Utils.hpp`.
     // Or you can use the push_back() method 
     content.push_back( { "This \nis me !"         ,     "Heuh \nanother one"  } );
 
-    Cli::Table table(opt,content);
+    CliTable::Table table(opt,content);
     //Generating the final table 
 
     table.generate();

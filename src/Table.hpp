@@ -11,7 +11,7 @@
 using TableBody = std::vector< std::vector<std::string> >;
 using RowMatrix  = std::vector< std::vector<std::string> >;
 
-namespace Cli {
+namespace CliTable {
 
     class Table {
     
