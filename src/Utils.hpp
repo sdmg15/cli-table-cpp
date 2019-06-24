@@ -126,42 +126,42 @@ namespace CliTable {
     };
 
 
-    class Utils {
+    namespace Utils {
 
-        public:
-            /**
-             * @brief Repeats a string x times 
-             * @param [int] x 
-             * @param [std::string] str
-             * @return [std::string]
-             **/
+        /**
+         * @brief Repeats a string x times 
+         * @param [int] x 
+         * @param [std::string] str
+         * @return [std::string]
+         **/
 
-            static auto repeats(std::string str, const int x) -> std::string;
+         auto repeats(std::string str, const int x) -> std::string;
 
-            /**
-             * @brief Pads a string according to a direction
-             * @param [std::string] str
-             * @param [char] len, the length of the padding 
-             * @param [int] padChar, the character to use for padding
-             * @param [CliTable::Direction] dir, the direction of the padding
-             * @return [std::string]
-             **/
+        /**
+         * @brief Pads a string according to a direction
+         * @param [std::string] str
+         * @param [char] len, the length of the padding 
+         * @param [int] padChar, the character to use for padding
+         * @param [CliTable::Direction] dir, the direction of the padding
+         * @return [std::string]
+         **/
 
-            static auto pad(std::string& str, const int len,
-                            const char padChar, const CliTable::Direction dir) -> std::string&;
+         auto pad(std::string& str, const int len,
+                        const char padChar, const CliTable::Direction dir) -> std::string&;
 
-            /**
-             * @brief truncates the given string 
-             * @param [std::string] str
-             * @param [int] len
-             * @param [std::string] chr, the char to put after the truncation
-             * @return [std::string]
-             **/
+        /**
+         * @brief truncates the given string 
+         * @param [std::string] str
+         * @param [int] len
+         * @param [std::string] chr, the char to put after the truncation
+         * @return [std::string]
+         **/
+        
+         auto truncate(std::string& str, const int len, const std::string& chr) -> std::string&;
 
-            static auto truncate(std::string& str, const int len, const std::string& chr) -> std::string&;
+         auto split(std::string str, const char delimiter) -> std::vector<std::string>; 
 
-            static auto split(std::string str, const char delimiter) -> std::vector<std::string>; 
-    };
+    } // namespace Utils
 
 } // namespace CliTable
 

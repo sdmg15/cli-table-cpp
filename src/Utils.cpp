@@ -11,9 +11,8 @@ auto CliTable::Utils::repeats(std::string str, const int x) -> std::string {
     for(int i(0); i< x; ++i){
         res += str;
     }
-    str=res; 
-
-    return str;
+    
+    return res; 
 }
 
 auto CliTable::Utils::pad(std::string& str, const int len, 
