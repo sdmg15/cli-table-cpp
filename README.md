@@ -17,15 +17,6 @@ Base on this [JavaScript project](https://github.com/Automattic/cli-table) .
 
 If all requirements are met then you can build using cmake :
 
-Create a build directory and change to it : 
-
-`mkdir build && cd build`
-
-
-Then install dependencies that are located in the `conanfile.txt` by running 
-
-`conan install ..`
-
 Then run the command according to the targetted OS 
 
 ```s
