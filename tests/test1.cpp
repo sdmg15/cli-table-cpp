@@ -7,7 +7,7 @@ int main(){
     // Options for the table to draw
     CliTable::Options opt;
     // Contructing the table structure
-    TableBody content = {
+    CliTable::TableBody content = {
                             { "value \nmultilines ?"     ,        "Nope \njust \ntesting" },
                             { "value Yes\n are you sure?" ,              "Teufy"      },
                             { "This \nis me !"         ,     "Heuh \nanother one"  },
