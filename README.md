@@ -1,6 +1,8 @@
 # cli-table-cpp
 Pretty unicode tables for the CLI with CPP
 
+[ ![Download](https://api.bintray.com/packages/sdmg15/cliTable/cli-table-cpp/images/download.svg) ](https://bintray.com/sdmg15/cliTable/cli-table-cpp/_latestVersion)
+
 I was looking for a simple and beautiful unicode table for the CLI for a toy 
 project written in C++ but didn't found one that satisfy my needs then I build one :smile:
 Base on this [JavaScript project](https://github.com/Automattic/cli-table) .
